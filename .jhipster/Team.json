@@ -1,0 +1,24 @@
+{
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "teamGroup",
+            "fieldType": "Group",
+            "fieldValues": "A,B,C,D,E,F"
+        }
+    ],
+    "changelogDate": "20160512185626",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "team",
+    "pagination": "no"
+}
