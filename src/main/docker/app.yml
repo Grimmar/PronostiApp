@@ -1,0 +1,15 @@
+version: '2'
+services:
+    pronostiapp-app:
+        image: pronostiapp
+        external_links:
+            - pronostiapp-postgresql:postgresql
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/PronostiApp
+        ports:
+            - 8080:8080
+    pronostiapp-postgresql:
+        extends:
+            file: postgresql.yml
+            service: pronostiapp-postgresql
