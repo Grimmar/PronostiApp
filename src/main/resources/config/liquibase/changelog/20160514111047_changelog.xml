@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="David (generated)" id="1463224255138-1">
+      <addColumn tableName="team">
+         <column name="team_g" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463224255138-2">
+      <addColumn tableName="team">
+         <column name="team_j" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463224255138-3">
+      <addColumn tableName="team">
+         <column name="team_n" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463224255138-4">
+      <addColumn tableName="team">
+         <column name="team_p" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463224255138-5">
+      <addColumn tableName="team">
+         <column name="team_pts" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463224255138-6">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+</databaseChangeLog>

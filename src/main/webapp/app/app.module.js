@@ -3,7 +3,8 @@
 
     angular
         .module('pronostiApp', [
-            'ngStorage', 
+            'ngStorage',
+            'angular.filter',
             'ngResource',
             'ngCookies',
             'ngAria',

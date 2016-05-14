@@ -9,6 +9,7 @@
     "angular-bootstrap": "1.2.5",
     "angular-cache-buster": "0.4.3",
     "angular-cookies": "1.5.2",
+    "angular-filter":"0.5.8",
     "ngstorage": "0.3.10",
     "angular-loading-bar": "0.9.0",
     "angular-resource": "1.5.2",

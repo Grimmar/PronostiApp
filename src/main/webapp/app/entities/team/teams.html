@@ -22,7 +22,11 @@
                     <th><span>Name</span></th>
                     <th><span>Code</span></th>
                     <th><span>Team Group</span></th>
-                    <th><span>Flag</span></th>
+                    <th><span>Team Pts</span></th>
+                    <th><span>Team J</span></th>
+                    <th><span>Team G</span></th>
+                    <th><span>Team N</span></th>
+                    <th><span>Team P</span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +36,11 @@
                     <td>{{team.name}}</td>
                     <td>{{team.code}}</td>
                     <td translate="{{'pronostiApp.Group.' + team.teamGroup}}">{{team.teamGroup}}</td>
-                    <td><span class="newflags {{team.code}}"></span></td>
+                    <td>{{team.teamPts}}</td>
+                    <td>{{team.teamJ}}</td>
+                    <td>{{team.teamG}}</td>
+                    <td>{{team.teamN}}</td>
+                    <td>{{team.teamP}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

@@ -50,6 +50,21 @@ public class TeamResourceIntTest {
     private static final Group DEFAULT_TEAM_GROUP = Group.A;
     private static final Group UPDATED_TEAM_GROUP = Group.B;
 
+    private static final Long DEFAULT_TEAM_PTS = 1L;
+    private static final Long UPDATED_TEAM_PTS = 2L;
+
+    private static final Long DEFAULT_TEAM_J = 1L;
+    private static final Long UPDATED_TEAM_J = 2L;
+
+    private static final Long DEFAULT_TEAM_G = 1L;
+    private static final Long UPDATED_TEAM_G = 2L;
+
+    private static final Long DEFAULT_TEAM_N = 1L;
+    private static final Long UPDATED_TEAM_N = 2L;
+
+    private static final Long DEFAULT_TEAM_P = 1L;
+    private static final Long UPDATED_TEAM_P = 2L;
+
     @Inject
     private TeamRepository teamRepository;
 
@@ -79,6 +94,11 @@ public class TeamResourceIntTest {
         team.setName(DEFAULT_NAME);
         team.setCode(DEFAULT_CODE);
         team.setTeamGroup(DEFAULT_TEAM_GROUP);
+        team.setTeamPts(DEFAULT_TEAM_PTS);
+        team.setTeamJ(DEFAULT_TEAM_J);
+        team.setTeamG(DEFAULT_TEAM_G);
+        team.setTeamN(DEFAULT_TEAM_N);
+        team.setTeamP(DEFAULT_TEAM_P);
     }
 
     @Test
@@ -100,6 +120,11 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTeam.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testTeam.getTeamGroup()).isEqualTo(DEFAULT_TEAM_GROUP);
+        assertThat(testTeam.getTeamPts()).isEqualTo(DEFAULT_TEAM_PTS);
+        assertThat(testTeam.getTeamJ()).isEqualTo(DEFAULT_TEAM_J);
+        assertThat(testTeam.getTeamG()).isEqualTo(DEFAULT_TEAM_G);
+        assertThat(testTeam.getTeamN()).isEqualTo(DEFAULT_TEAM_N);
+        assertThat(testTeam.getTeamP()).isEqualTo(DEFAULT_TEAM_P);
     }
 
     @Test
@@ -115,7 +140,12 @@ public class TeamResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(team.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
-                .andExpect(jsonPath("$.[*].teamGroup").value(hasItem(DEFAULT_TEAM_GROUP.toString())));
+                .andExpect(jsonPath("$.[*].teamGroup").value(hasItem(DEFAULT_TEAM_GROUP.toString())))
+                .andExpect(jsonPath("$.[*].teamPts").value(hasItem(DEFAULT_TEAM_PTS.intValue())))
+                .andExpect(jsonPath("$.[*].teamJ").value(hasItem(DEFAULT_TEAM_J.intValue())))
+                .andExpect(jsonPath("$.[*].teamG").value(hasItem(DEFAULT_TEAM_G.intValue())))
+                .andExpect(jsonPath("$.[*].teamN").value(hasItem(DEFAULT_TEAM_N.intValue())))
+                .andExpect(jsonPath("$.[*].teamP").value(hasItem(DEFAULT_TEAM_P.intValue())));
     }
 
     @Test
@@ -131,7 +161,12 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.id").value(team.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
-            .andExpect(jsonPath("$.teamGroup").value(DEFAULT_TEAM_GROUP.toString()));
+            .andExpect(jsonPath("$.teamGroup").value(DEFAULT_TEAM_GROUP.toString()))
+            .andExpect(jsonPath("$.teamPts").value(DEFAULT_TEAM_PTS.intValue()))
+            .andExpect(jsonPath("$.teamJ").value(DEFAULT_TEAM_J.intValue()))
+            .andExpect(jsonPath("$.teamG").value(DEFAULT_TEAM_G.intValue()))
+            .andExpect(jsonPath("$.teamN").value(DEFAULT_TEAM_N.intValue()))
+            .andExpect(jsonPath("$.teamP").value(DEFAULT_TEAM_P.intValue()));
     }
 
     @Test
@@ -155,6 +190,11 @@ public class TeamResourceIntTest {
         updatedTeam.setName(UPDATED_NAME);
         updatedTeam.setCode(UPDATED_CODE);
         updatedTeam.setTeamGroup(UPDATED_TEAM_GROUP);
+        updatedTeam.setTeamPts(UPDATED_TEAM_PTS);
+        updatedTeam.setTeamJ(UPDATED_TEAM_J);
+        updatedTeam.setTeamG(UPDATED_TEAM_G);
+        updatedTeam.setTeamN(UPDATED_TEAM_N);
+        updatedTeam.setTeamP(UPDATED_TEAM_P);
 
         restTeamMockMvc.perform(put("/api/teams")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -168,6 +208,11 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTeam.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testTeam.getTeamGroup()).isEqualTo(UPDATED_TEAM_GROUP);
+        assertThat(testTeam.getTeamPts()).isEqualTo(UPDATED_TEAM_PTS);
+        assertThat(testTeam.getTeamJ()).isEqualTo(UPDATED_TEAM_J);
+        assertThat(testTeam.getTeamG()).isEqualTo(UPDATED_TEAM_G);
+        assertThat(testTeam.getTeamN()).isEqualTo(UPDATED_TEAM_N);
+        assertThat(testTeam.getTeamP()).isEqualTo(UPDATED_TEAM_P);
     }
 
     @Test

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/team',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_USER'],
                 pageTitle: 'Teams'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'entity',
             url: '/team/{id}',
             data: {
-                authorities: ['ROLE_ADMIN'],
+                authorities: ['ROLE_USER'],
                 pageTitle: 'Team'
             },
             views: {
@@ -50,7 +50,7 @@
             parent: 'team',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -65,6 +65,11 @@
                                 name: null,
                                 code: null,
                                 teamGroup: null,
+                                teamPts: null,
+                                teamJ: null,
+                                teamG: null,
+                                teamN: null,
+                                teamP: null,
                                 id: null
                             };
                         }
@@ -80,7 +85,7 @@
             parent: 'team',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -105,7 +110,7 @@
             parent: 'team',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({

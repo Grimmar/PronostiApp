@@ -33,6 +33,21 @@ public class Team implements Serializable {
     @Column(name = "team_group")
     private Group teamGroup;
 
+    @Column(name = "team_pts")
+    private Long teamPts;
+
+    @Column(name = "team_j")
+    private Long teamJ;
+
+    @Column(name = "team_g")
+    private Long teamG;
+
+    @Column(name = "team_n")
+    private Long teamN;
+
+    @Column(name = "team_p")
+    private Long teamP;
+
     public Long getId() {
         return id;
     }
@@ -65,6 +80,46 @@ public class Team implements Serializable {
         this.teamGroup = teamGroup;
     }
 
+    public Long getTeamPts() {
+        return teamPts;
+    }
+
+    public void setTeamPts(Long teamPts) {
+        this.teamPts = teamPts;
+    }
+
+    public Long getTeamJ() {
+        return teamJ;
+    }
+
+    public void setTeamJ(Long teamJ) {
+        this.teamJ = teamJ;
+    }
+
+    public Long getTeamG() {
+        return teamG;
+    }
+
+    public void setTeamG(Long teamG) {
+        this.teamG = teamG;
+    }
+
+    public Long getTeamN() {
+        return teamN;
+    }
+
+    public void setTeamN(Long teamN) {
+        this.teamN = teamN;
+    }
+
+    public Long getTeamP() {
+        return teamP;
+    }
+
+    public void setTeamP(Long teamP) {
+        this.teamP = teamP;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -92,6 +147,11 @@ public class Team implements Serializable {
             ", name='" + name + "'" +
             ", code='" + code + "'" +
             ", teamGroup='" + teamGroup + "'" +
+            ", teamPts='" + teamPts + "'" +
+            ", teamJ='" + teamJ + "'" +
+            ", teamG='" + teamG + "'" +
+            ", teamN='" + teamN + "'" +
+            ", teamP='" + teamP + "'" +
             '}';
     }
 }

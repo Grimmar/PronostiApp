@@ -14,7 +14,28 @@
             "fieldName": "teamGroup",
             "fieldType": "Group",
             "fieldValues": "A,B,C,D,E,F"
+        },
+        {
+            "fieldName": "teamPts",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "teamJ",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "teamG",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "teamN",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "teamP",
+            "fieldType": "Long"
         }
+
     ],
     "changelogDate": "20160512185626",
     "dto": "no",
