@@ -1,0 +1,36 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "team_1",
+            "otherEntityName": "team",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "team_2",
+            "otherEntityName": "team",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "matchDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "diffusion",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "matchType",
+            "fieldType": "MatchType",
+            "fieldValues": "POULE, HUITIEME, QUART, DEMI_FINALE, FINALE, PETITE_FINALE"
+        }
+    ],
+    "changelogDate": "20160514183806",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "match",
+    "pagination": "no"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="David (generated)" id="1463399490146-1">
+      <createTable tableName="user_score">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="user_scorePK"/>
+         </column>
+         <column name="score" type="BIGINT"/>
+         <column name="user_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463399490146-2">
+      <addForeignKeyConstraint baseColumnNames="user_id"
+                               baseTableName="user_score"
+                               constraintName="FK_6dcsvlc8d9061gwdkx52klpiw"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463399490146-3">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463399490146-4">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="match_date"
+                        tableName="match"/>
+   </changeSet>
+</databaseChangeLog>

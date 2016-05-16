@@ -38,6 +38,49 @@
             </p>
         </div>
     </div>-->
+    <div>
+        <div class="col-md-4">
+            <h3>Prochains Matchs</h3>
+            <div ng-repeat="(date, value) in vm.nextMatches | groupBy:'dayDate'">
+            <h4>{{date}}</h4>
+            <table class="table">
+                  <tr ng-repeat="m in value">
+                      <td><span>{{m.team_1.name}}</span></td>
+                      <td><span class="newflags {{m.team_1.code}}"></span></td>
+                      <td><span><strong>{{m.hours}}</strong></span></td>
+                      <td><span class="newflags {{m.team_2.code}}"></span></td>
+                      <td><span>{{m.team_2.name}}</span> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Derniers résultats</h3>
+            <div ng-repeat="(date, value) in vm.lastMatches | groupBy:'dayDate'">
+                <h4>{{date}}</h4>
+                <table class="table">
+                    <tr ng-repeat="m in value">
+                    <td><span>{{m.team_1.name}}</span></td>
+                    <td><span class="newflags {{m.team_1.code}}"></span></td>
+                    <td><span class="newflags {{m.team_2.code}}"></span></td>
+                    <td><span>{{m.team_2.name}}</span> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Classement</h3>
+            <table class="table">
+                <tr ng-repeat="userScore in max8Score">
+                    <td>{{max8Score}}</td>
+                    <td>{{userScore.userScore}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div style="clear:both;"></div>
 <div class="col-md-4" ng-repeat="(key, value) in vm.teams | groupBy: 'teamGroup'">
     <h3>Group {{key}}</h3>
     <table class="table">
@@ -52,13 +95,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="team in value">
+        <tr ng-repeat="team in value | orderBy : '-teamPts'">
             <td><span class="newflags {{team.code}}" style="margin-right:5px;"></span><span>{{team.name}}</span></td>
-            <td><span>0</span></td>
-            <td><span>0</span></td>
-            <td><span>0</span></td>
-            <td><span>0</span></td>
-            <td><span>0</span></td>
+            <td><span>{{team.teamPts}}</span></td>
+            <td><span>{{team.teamJ}}</span></td>
+            <td><span>{{team.teamG}}</span></td>
+            <td><span>{{team.teamN}}</span></td>
+            <td><span>{{team.teamP}}</span></td>
         </tr>
         </tbody>
     </table>

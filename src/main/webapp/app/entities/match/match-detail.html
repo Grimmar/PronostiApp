@@ -1,0 +1,33 @@
+
+<div>
+    <h2><span>Match</span> {{vm.match.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Match Date</span></dt>
+        <dd>
+            <span>{{vm.match.matchDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Diffusion</span></dt>
+        <dd>
+            <span>{{vm.match.diffusion}}</span>
+        </dd>
+        <dt><span>Match Type</span></dt>
+        <dd>
+            <span translate="{{'pronostiApp.MatchType.' + vm.match.matchType}}">{{vm.match.matchType}}</span>
+        </dd>
+        <dt><span translate="pronostiApp.match.team_1">Team 1</span></dt>
+        <dd>
+            <a ui-sref="team-detail({id:vm.match.team_1.id})">{{vm.match.team_1.name}}</a>
+        </dd>
+        <dt><span translate="pronostiApp.match.team_2">Team 2</span></dt>
+        <dd>
+            <a ui-sref="team-detail({id:vm.match.team_2.id})">{{vm.match.team_2.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

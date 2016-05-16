@@ -21,6 +21,9 @@
 
         getAccount();
         getAllTeam();
+        getNextMatches();
+        getLastMatches();
+        getMax8Score();
 
         function getAccount() {
             Principal.identity().then(function(account) {
@@ -32,7 +35,7 @@
             $state.go('register');
         }
 
-        function getAllTeam ($scope, $state, Team) {
+        function getAllTeam ($scope, $state) {
                 vm.teams = [];
                 vm.loadAll = function() {
 
@@ -56,6 +59,79 @@
 
                 vm.loadAll();
 
+        }
+
+        function getNextMatches($scope, $state) {
+                vm.nextMatches = [];
+                vm.loadAll = function() {
+
+                        var resourceUrl =  'api/nextMatches';
+
+                        var match = $resource(resourceUrl, {}, {
+                            'query': { method: 'GET', isArray: true},
+                            'get': {
+                                method: 'GET',
+                                transformResponse: function (data) {
+                                    data = angular.fromJson(data);
+                                    data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
+                                    return data;
+                                }
+                            },
+                            'update': { method:'PUT' }
+                        });
+                    match.query(function(result) {
+                        vm.nextMatches = result;
+                    });
+                };
+
+                vm.loadAll();
+        }
+
+        function getLastMatches($scope, $state){
+            vm.lastMatches = [];
+                vm.loadAll = function() {
+                    var resourceUrl =  'api/lastMatches';
+
+                    var match = $resource(resourceUrl, {}, {
+                        'query': { method: 'GET', isArray: true},
+                        'get': {
+                            method: 'GET',
+                            transformResponse: function (data) {
+                                data = angular.fromJson(data);
+                                data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
+                                    return data;
+                                }
+                            },
+                        'update': { method:'PUT' }
+                    });
+                    match.query(function(result) {
+                        vm.lastMatches = result;
+                    });
+                };
+            vm.loadAll();
+        }
+
+        function getMax8Score($scope, $state){
+            vm.max8Score = [];
+            vm.loadAll = function() {
+                var resourceUrl = 'api/user-scores';
+
+                var score = $resource(resourceUrl, {}, {
+                                        'query': { method: 'GET', isArray: true},
+                                        'get': {
+                                            method: 'GET',
+                                            transformResponse: function (data) {
+                                                data = angular.fromJson(data);
+                                                return data;
+                                            }
+                                        },
+                                        'update': { method:'PUT' }
+                                    });
+                score.query(function(result) {
+                    vm.max8Score = result;
+                });
+            };
+            vm.loadAll();
         }
     }
 })();

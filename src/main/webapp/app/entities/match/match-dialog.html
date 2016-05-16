@@ -1,0 +1,65 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myMatchLabel">Create or edit a Match</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.match.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.match.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_matchDate">Match Date</label>
+                <div class="input-group">
+                    <input id="field_matchDate" type="text" class="form-control" name="matchDate" datetime-picker="{{dateformat}}" ng-model="vm.match.matchDate" is-open="vm.datePickerOpenStatus.matchDate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('matchDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_diffusion">Diffusion</label>
+            <input type="text" class="form-control" name="diffusion" id="field_diffusion"
+                    ng-model="vm.match.diffusion"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_matchType">Match Type</label>
+            <select class="form-control" name="matchType" ng-model="vm.match.matchType" id="field_matchType">
+                <option value="POULE">POULE</option>
+                <option value="HUITIEME">HUITIEME</option>
+                <option value="QUART">QUART</option>
+                <option value="DEMI_FINALE" translate="pronostiApp.MatchType.DEMI_FINALE">DEMI_FINALE</option>
+                <option value="FINALE">FINALE</option>
+                <option value="PETITE_FINALE" translate="pronostiApp.MatchType.PETITE_FINALE">PETITE_FINALE</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label translate="pronostiApp.match.team_1" for="field_team_1">Team 1</label>
+            <select class="form-control" id="field_team_1" name="team_1" ng-model="vm.match.team_1" ng-options="team as team.name for team in vm.teams track by team.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label translate="pronostiApp.match.team_2" for="field_team_2">Team 2</label>
+            <select class="form-control" id="field_team_2" name="team_2" ng-model="vm.match.team_2" ng-options="team as team.name for team in vm.teams track by team.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
