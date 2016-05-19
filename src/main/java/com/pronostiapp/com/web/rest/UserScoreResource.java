@@ -90,6 +90,22 @@ public class UserScoreResource {
         List<UserScore> userScores = userScoreRepository.findAll();
         return userScores;
     }
+    
+    /**
+     * GET  /user-scores : get the top userScores.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of top userScores in body
+     */
+    @RequestMapping(value = "/topUserScores",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<UserScore> getTopUserScores() {
+        log.debug("REST request to get the top UserScores");
+        
+        List<UserScore> topUserScores = userScoreRepository.queryFirst5ByOrderByScoreDesc();
+        return topUserScores;
+    }
 
     /**
      * GET  /user-scores/:id : get the "id" userScore.

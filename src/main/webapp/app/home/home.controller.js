@@ -23,7 +23,9 @@
         getAllTeam();
         getNextMatches();
         getLastMatches();
-        getMax8Score();
+        getAllUserScores();
+        getTopUserScores();
+        //getMax8Score();
 
         function getAccount() {
             Principal.identity().then(function(account) {
@@ -111,10 +113,57 @@
             vm.loadAll();
         }
 
+        
+        function getAllUserScores($scope, $state){
+            vm.allUserScores = [];
+            vm.loadAll = function() {
+                var resourceUrl = 'api/user-scores';
+
+                var score = $resource(resourceUrl, {}, {
+                                        'query': { method: 'GET', isArray: true},
+                                        'get': {
+                                            method: 'GET',
+                                            transformResponse: function (data) {
+                                                data = angular.fromJson(data);
+                                                return data;
+                                            }
+                                        },
+                                        'update': { method:'PUT' }
+                                    });
+                score.query(function(result) {
+                    vm.allUserScores = result;
+                });
+            };
+            vm.loadAll();
+        }
+        
+        function getTopUserScores($scope, $state){
+            vm.topUserScores = [];
+            vm.loadAll = function() {
+                var resourceUrl = 'api/topUserScores';
+
+                var score = $resource(resourceUrl, {}, {
+                                        'query': { method: 'GET', isArray: true},
+                                        'get': {
+                                            method: 'GET',
+                                            transformResponse: function (data) {
+                                                data = angular.fromJson(data);
+                                                return data;
+                                            }
+                                        },
+                                        'update': { method:'PUT' }
+                                    });
+                score.query(function(result) {
+                    vm.topUserScores = result;
+                });
+            };
+            vm.loadAll();
+        }
+        
         function getMax8Score($scope, $state){
             vm.max8Score = [];
             vm.loadAll = function() {
-                var resourceUrl = 'api/user-scores';
+                var resourceUrl = 'api/topUserScores';
 
                 var score = $resource(resourceUrl, {}, {
                                         'query': { method: 'GET', isArray: true},

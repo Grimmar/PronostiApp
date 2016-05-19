@@ -71,9 +71,9 @@
         <div class="col-md-4">
             <h3>Classement</h3>
             <table class="table">
-                <tr ng-repeat="userScore in max8Score">
-                    <td>{{max8Score}}</td>
-                    <td>{{userScore.userScore}}</td>
+                <tr ng-repeat="userScore in vm.topUserScores">
+                    <td>{{userScore.user.login}}</td>
+                    <td>{{userScore.score}}</td>
                 </tr>
             </table>
         </div>
