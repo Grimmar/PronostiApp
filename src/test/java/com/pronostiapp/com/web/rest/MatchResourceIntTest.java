@@ -58,6 +58,12 @@ public class MatchResourceIntTest {
     private static final MatchType DEFAULT_MATCH_TYPE = MatchType.POULE;
     private static final MatchType UPDATED_MATCH_TYPE = MatchType.HUITIEME;
 
+    private static final Long DEFAULT_SCORE_TEAM_1 = 1L;
+    private static final Long UPDATED_SCORE_TEAM_1 = 2L;
+
+    private static final Long DEFAULT_SCORE_TEAM_2 = 1L;
+    private static final Long UPDATED_SCORE_TEAM_2 = 2L;
+
     @Inject
     private MatchRepository matchRepository;
 
@@ -87,6 +93,8 @@ public class MatchResourceIntTest {
         match.setMatchDate(DEFAULT_MATCH_DATE);
         match.setDiffusion(DEFAULT_DIFFUSION);
         match.setMatchType(DEFAULT_MATCH_TYPE);
+        match.setScoreTeam1(DEFAULT_SCORE_TEAM_1);
+        match.setScoreTeam2(DEFAULT_SCORE_TEAM_2);
     }
 
     @Test
@@ -108,6 +116,8 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getMatchDate()).isEqualTo(DEFAULT_MATCH_DATE);
         assertThat(testMatch.getDiffusion()).isEqualTo(DEFAULT_DIFFUSION);
         assertThat(testMatch.getMatchType()).isEqualTo(DEFAULT_MATCH_TYPE);
+        assertThat(testMatch.getScoreTeam1()).isEqualTo(DEFAULT_SCORE_TEAM_1);
+        assertThat(testMatch.getScoreTeam2()).isEqualTo(DEFAULT_SCORE_TEAM_2);
     }
 
     @Test
@@ -123,7 +133,9 @@ public class MatchResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(match.getId().intValue())))
                 .andExpect(jsonPath("$.[*].matchDate").value(hasItem(DEFAULT_MATCH_DATE_STR)))
                 .andExpect(jsonPath("$.[*].diffusion").value(hasItem(DEFAULT_DIFFUSION.toString())))
-                .andExpect(jsonPath("$.[*].matchType").value(hasItem(DEFAULT_MATCH_TYPE.toString())));
+                .andExpect(jsonPath("$.[*].matchType").value(hasItem(DEFAULT_MATCH_TYPE.toString())))
+                .andExpect(jsonPath("$.[*].scoreTeam1").value(hasItem(DEFAULT_SCORE_TEAM_1.intValue())))
+                .andExpect(jsonPath("$.[*].scoreTeam2").value(hasItem(DEFAULT_SCORE_TEAM_2.intValue())));
     }
 
     @Test
@@ -139,7 +151,9 @@ public class MatchResourceIntTest {
             .andExpect(jsonPath("$.id").value(match.getId().intValue()))
             .andExpect(jsonPath("$.matchDate").value(DEFAULT_MATCH_DATE_STR))
             .andExpect(jsonPath("$.diffusion").value(DEFAULT_DIFFUSION.toString()))
-            .andExpect(jsonPath("$.matchType").value(DEFAULT_MATCH_TYPE.toString()));
+            .andExpect(jsonPath("$.matchType").value(DEFAULT_MATCH_TYPE.toString()))
+            .andExpect(jsonPath("$.scoreTeam1").value(DEFAULT_SCORE_TEAM_1.intValue()))
+            .andExpect(jsonPath("$.scoreTeam2").value(DEFAULT_SCORE_TEAM_2.intValue()));
     }
 
     @Test
@@ -163,6 +177,8 @@ public class MatchResourceIntTest {
         updatedMatch.setMatchDate(UPDATED_MATCH_DATE);
         updatedMatch.setDiffusion(UPDATED_DIFFUSION);
         updatedMatch.setMatchType(UPDATED_MATCH_TYPE);
+        updatedMatch.setScoreTeam1(UPDATED_SCORE_TEAM_1);
+        updatedMatch.setScoreTeam2(UPDATED_SCORE_TEAM_2);
 
         restMatchMockMvc.perform(put("/api/matches")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -176,6 +192,8 @@ public class MatchResourceIntTest {
         assertThat(testMatch.getMatchDate()).isEqualTo(UPDATED_MATCH_DATE);
         assertThat(testMatch.getDiffusion()).isEqualTo(UPDATED_DIFFUSION);
         assertThat(testMatch.getMatchType()).isEqualTo(UPDATED_MATCH_TYPE);
+        assertThat(testMatch.getScoreTeam1()).isEqualTo(UPDATED_SCORE_TEAM_1);
+        assertThat(testMatch.getScoreTeam2()).isEqualTo(UPDATED_SCORE_TEAM_2);
     }
 
     @Test

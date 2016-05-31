@@ -1,0 +1,37 @@
+
+<div>
+    <h2><span>User Pronostic</span> {{vm.userPronostic.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Score Team 1</span></dt>
+        <dd>
+            <span>{{vm.userPronostic.scoreTeam1}}</span>
+        </dd>
+        <dt><span>Score Team 2</span></dt>
+        <dd>
+            <span>{{vm.userPronostic.scoreTeam2}}</span>
+        </dd>
+        <dt><span>Pronostic Date</span></dt>
+        <dd>
+            <span>{{vm.userPronostic.pronosticDate | date:'medium'}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.userPronostic.user.login}}
+        </dd>
+        <dt><span>Winner Team</span></dt>
+        <dd>
+            <a ui-sref="team-detail({id:vm.userPronostic.winnerTeam.id})">{{vm.userPronostic.winnerTeam.name}}</a>
+        </dd>
+        <dt><span>Match</span></dt>
+        <dd>
+            <a ui-sref="match-detail({id:vm.userPronostic.match.id})">{{vm.userPronostic.match.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

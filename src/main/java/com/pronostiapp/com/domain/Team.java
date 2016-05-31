@@ -15,7 +15,7 @@ import com.pronostiapp.com.domain.enumeration.Group;
 @Entity
 @Table(name = "team")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Team implements Serializable {
+public class Team implements Serializable, Cloneable{
 
     private static final long serialVersionUID = 1L;
 
@@ -153,5 +153,11 @@ public class Team implements Serializable {
             ", teamN='" + teamN + "'" +
             ", teamP='" + teamP + "'" +
             '}';
+    }
+
+    @Override
+    public Team clone() throws CloneNotSupportedException{
+        Team clone = (Team) super.clone();
+        return clone;
     }
 }

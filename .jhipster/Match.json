@@ -11,6 +11,12 @@
             "otherEntityName": "team",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "winner",
+            "otherEntityName": "team",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -26,6 +32,18 @@
             "fieldName": "matchType",
             "fieldType": "MatchType",
             "fieldValues": "POULE, HUITIEME, QUART, DEMI_FINALE, FINALE, PETITE_FINALE"
+        },
+        {
+            "fieldName":"scoreTeam1",
+            "fieldType":"Long"
+        },
+        {
+            "fieldName":"scoreTeam2",
+            "fieldType":"Long"
+        },
+        {
+            "fieldName":"compute",
+            "fieldType":"Boolean"
         }
     ],
     "changelogDate": "20160514183806",

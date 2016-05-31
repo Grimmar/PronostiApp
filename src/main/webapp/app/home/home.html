@@ -1,43 +1,4 @@
 <div ng-cloak>
-   <!-- <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
-        </div>
-        <div class="col-md-8">
-            <h1>Welcome, Java Hipster!</h1>
-            <p class="lead">This is your homepage</p>
-
-            <div ng-switch="vm.isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true">
-                    You are logged in as user "{{vm.account.login}}".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false">
-                    If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false">
-                    You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
-                </div>
-            </div>
-
-            <p>
-                If you have any question on JHipster:
-            </p>
-
-            <ul>
-                <li><a href="http://jhipster.github.io/" target="_blank">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank">JHipster bug tracker</a></li>
-                <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank">JHipster public chat room</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank" >follow @java_hipster on Twitter</a></li>
-            </ul>
-
-            <p>
-             <span>If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank">Github</a>!
-            </p>
-        </div>
-    </div>-->
     <div>
         <div class="col-md-4">
             <h3>Prochains Matchs</h3>
@@ -60,10 +21,11 @@
                 <h4>{{date}}</h4>
                 <table class="table">
                     <tr ng-repeat="m in value">
-                    <td><span>{{m.team_1.name}}</span></td>
-                    <td><span class="newflags {{m.team_1.code}}"></span></td>
-                    <td><span class="newflags {{m.team_2.code}}"></span></td>
-                    <td><span>{{m.team_2.name}}</span> </td>
+                        <td><span>{{m.team_1.name}}</span></td>
+                        <td><span class="newflags {{m.team_1.code}}"></span></td>
+                        <td><span><strong>{{m.scoreTeam1}} - {{m.scoreTeam2}}</strong></span></td>
+                        <td><span class="newflags {{m.team_2.code}}"></span></td>
+                        <td><span>{{m.team_2.name}}</span> </td>
                     </tr>
                 </table>
             </div>
@@ -81,6 +43,29 @@
     </div>
 
     <div style="clear:both;"></div>
+
+    <div id="tree" ng-show="vm.showTree" style="display:flex;justify-content: space-around;">
+        <div id="eigtht" style="height: 300px; display:flex;flex-direction: column;justify-content: space-around;">
+            <div ng-repeat="eighthMatch in vm.eighth">
+                <div style="width:200px;">
+                    <span class="newflags {{eighthMatch.team_1.code}}"></span><span>{{eighthMatch.team_1.name}}</span>
+                </div>
+                <div style="width:200px;">
+                    <span class="newflags {{eighthMatch.team_2.code}}"></span><span>{{eighthMatch.team_2.name}}</span>
+                </div>
+            </div>
+        </div>
+        <div id="fourth" style="height: 300px; display:flex;flex-direction: column;justify-content: space-around;">
+            <div ng-repeat="fourthMatch in vm.fourth">
+                <div style="width:200px;">
+                    <span class="newflags {{fourthMatch.team_1.code}}"></span><span>{{fourthMatch.team_1.name}}</span>
+                </div>
+                <div style="width:200px;">
+                    <span class="newflags {{fourthMatch.team_2.code}}"></span><span>{{fourthMatch.team_2.name}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="col-md-4" ng-repeat="(key, value) in vm.teams | groupBy: 'teamGroup'">
     <h3>Group {{key}}</h3>
     <table class="table">

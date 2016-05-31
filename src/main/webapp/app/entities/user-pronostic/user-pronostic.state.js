@@ -9,119 +9,117 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('match', {
+        .state('user-pronostic', {
             parent: 'entity',
-            url: '/match',
+            url: '/user-pronostic',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'Matches'
+                pageTitle: 'UserPronostics'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/match/matches.html',
-                    controller: 'MatchController',
+                    templateUrl: 'app/entities/user-pronostic/user-pronostics.html',
+                    controller: 'UserPronosticController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
             }
         })
-        .state('match-detail', {
+        .state('user-pronostic-detail', {
             parent: 'entity',
-            url: '/match/{id}',
+            url: '/user-pronostic/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'Match'
+                pageTitle: 'UserPronostic'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/match/match-detail.html',
-                    controller: 'MatchDetailController',
+                    templateUrl: 'app/entities/user-pronostic/user-pronostic-detail.html',
+                    controller: 'UserPronosticDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                entity: ['$stateParams', 'Match', function($stateParams, Match) {
-                    return Match.get({id : $stateParams.id});
+                entity: ['$stateParams', 'UserPronostic', function($stateParams, UserPronostic) {
+                    return UserPronostic.get({id : $stateParams.id});
                 }]
             }
         })
-        .state('match.new', {
-            parent: 'match',
+        .state('user-pronostic.new', {
+            parent: 'user-pronostic',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/match/match-dialog.html',
-                    controller: 'MatchDialogController',
+                    templateUrl: 'app/entities/user-pronostic/user-pronostic-dialog.html',
+                    controller: 'UserPronosticDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                matchDate: null,
-                                diffusion: null,
-                                matchType: null,
                                 scoreTeam1: null,
                                 scoreTeam2: null,
+                                pronosticDate: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('match', null, { reload: true });
+                    $state.go('user-pronostic', null, { reload: true });
                 }, function() {
-                    $state.go('match');
+                    $state.go('user-pronostic');
                 });
             }]
         })
-        .state('match.edit', {
-            parent: 'match',
+        .state('user-pronostic.edit', {
+            parent: 'user-pronostic',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/match/match-dialog.html',
-                    controller: 'MatchDialogController',
+                    templateUrl: 'app/entities/user-pronostic/user-pronostic-dialog.html',
+                    controller: 'UserPronosticDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Match', function(Match) {
-                            return Match.get({id : $stateParams.id});
+                        entity: ['UserPronostic', function(UserPronostic) {
+                            return UserPronostic.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('match', null, { reload: true });
+                    $state.go('user-pronostic', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('match.delete', {
-            parent: 'match',
+        .state('user-pronostic.delete', {
+            parent: 'user-pronostic',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/match/match-delete-dialog.html',
-                    controller: 'MatchDeleteController',
+                    templateUrl: 'app/entities/user-pronostic/user-pronostic-delete-dialog.html',
+                    controller: 'UserPronosticDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Match', function(Match) {
-                            return Match.get({id : $stateParams.id});
+                        entity: ['UserPronostic', function(UserPronostic) {
+                            return UserPronostic.get({id : $stateParams.id});
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('match', null, { reload: true });
+                    $state.go('user-pronostic', null, { reload: true });
                 }, function() {
                     $state.go('^');
                 });

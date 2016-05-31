@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="David (generated)" id="1463657706092-1">
+      <createTable tableName="user_pronostic">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="user_pronosticPK"/>
+         </column>
+         <column name="pronostic_date" type="timestamp"/>
+         <column name="score_team_1" type="BIGINT"/>
+         <column name="score_team_2" type="BIGINT"/>
+         <column name="match_id" type="BIGINT"/>
+         <column name="user_id" type="BIGINT"/>
+         <column name="winner_team_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463657706092-2">
+      <addForeignKeyConstraint baseColumnNames="match_id"
+                               baseTableName="user_pronostic"
+                               constraintName="FK_aqtdrb61tq0se3jli7o4yb91u"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="match"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463657706092-3">
+      <addForeignKeyConstraint baseColumnNames="winner_team_id"
+                               baseTableName="user_pronostic"
+                               constraintName="FK_bc70j18susel9nurfcki9b1ue"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="team"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463657706092-4">
+      <addForeignKeyConstraint baseColumnNames="user_id"
+                               baseTableName="user_pronostic"
+                               constraintName="FK_no4c36o90k513svt90e8svgoq"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463657706092-5">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463657706092-6">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="match_date"
+                        tableName="match"/>
+   </changeSet>
+</databaseChangeLog>

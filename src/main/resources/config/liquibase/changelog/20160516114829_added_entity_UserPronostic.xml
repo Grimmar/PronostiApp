@@ -14,25 +14,13 @@
     <property name="floatType" value="float" dbms="mysql, oracle"/>
 
     <!--
-        Added the entity Match.
+        Added the entity UserPronostic.
     -->
-    <changeSet id="20160514183806-1" author="jhipster">
-        <createTable tableName="match">
+    <changeSet id="20160516114829-1" author="jhipster">
+        <createTable tableName="userPronostic">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="match_date" type="timestamp">
-                <constraints nullable="true" />
-            </column>
-            
-            <column name="diffusion" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            
-            <column name="match_type" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            
             <column name="score_team_1" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -41,21 +29,25 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="team_1_id" type="bigint">
+            <column name="pronostic_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="team_2_id" type="bigint">
+            <column name="winner_team_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
-            <column name="winner_id" type="bigint">
+            <column name="match_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="match" columnName="match_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="userPronostic" columnName="pronostic_date" columnDataType="datetime"/>
         
     </changeSet>
 </databaseChangeLog>

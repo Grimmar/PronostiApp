@@ -2,11 +2,16 @@ package com.pronostiapp.com.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pronostiapp.com.domain.Match;
+import com.pronostiapp.com.domain.User;
+import com.pronostiapp.com.domain.UserPronostic;
+import com.pronostiapp.com.domain.enumeration.MatchType;
 import com.pronostiapp.com.repository.MatchRepository;
+import com.pronostiapp.com.repository.UserPronosticRepository;
+import com.pronostiapp.com.repository.UserRepository;
+import com.pronostiapp.com.security.SecurityUtils;
 import com.pronostiapp.com.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +35,12 @@ public class MatchResource {
 
     @Inject
     private MatchRepository matchRepository;
+
+    @Inject
+    private UserPronosticRepository userPronosticRepository;
+
+    @Inject
+    private UserRepository userRepository;
 
     /**
      * POST  /matches : Create a new match.
@@ -71,6 +82,9 @@ public class MatchResource {
         if (match.getId() == null) {
             return createMatch(match);
         }
+
+        //if()
+
         Match result = matchRepository.save(match);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("match", match.getId().toString()))
@@ -92,6 +106,16 @@ public class MatchResource {
         return matches;
     }
 
+    @RequestMapping(value = "/matchesOrdered",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getAllMatchesOrderedByMatchDate() {
+        log.debug("REST request to get all Matches");
+        List<Match> matches = matchRepository.queryByOrderByMatchDateAsc();
+        return matches;
+    }
+
 
     /**
      * GET  /matches : get all the matches.
@@ -109,6 +133,77 @@ public class MatchResource {
         return matches;
     }
 
+    /**
+     * GET  /matches : get all next matches.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of matches in body
+     */
+    @RequestMapping(value = "/allNextMatches",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getAllNextMatches() {
+        log.debug("REST request to get all next Matches");
+        ZonedDateTime today = ZonedDateTime.now();
+        String userLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> currentUser = userRepository.findOneByLogin(userLogin);
+        List<Match> matches = matchRepository.queryByMatchDateAfterOrderByMatchDateAsc(today);
+        List<UserPronostic> pronosticsForCurrentUser = userPronosticRepository.findByUserIsCurrentUser();
+
+        for(Match match : matches){
+            Optional<UserPronostic> p = pronosticsForCurrentUser
+                .stream()
+                .filter(x -> x.getMatch().getId() == match.getId())
+                .findFirst();
+            if(p.isPresent()) {
+                match.setUserPronosticForCurrentUser(p.get());
+            } else {
+                UserPronostic prono = new UserPronostic();
+                try {
+                    prono.setMatch(match.clone());
+                }catch(CloneNotSupportedException ex){
+                    //nothing
+                }
+                prono.setUser(currentUser.get());
+                match.setUserPronosticForCurrentUser(prono);
+            }
+        }
+        return matches;
+    }
+
+    @RequestMapping(value = "/allLastMatches",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getAllLastMatches() {
+        log.debug("REST request to get all next Matches");
+        ZonedDateTime today = ZonedDateTime.now();
+        String userLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> currentUser = userRepository.findOneByLogin(userLogin);
+        List<Match> matches = matchRepository.queryByMatchDateBeforeOrderByMatchDateAsc(today);
+        List<UserPronostic> pronosticsForCurrentUser = userPronosticRepository.findByUserIsCurrentUser();
+
+        for(Match match : matches){
+            Optional<UserPronostic> p = pronosticsForCurrentUser
+                .stream()
+                .filter(x -> x.getMatch().getId() == match.getId())
+                .findFirst();
+            if(p.isPresent()) {
+                match.setUserPronosticForCurrentUser(p.get());
+            } else {
+                UserPronostic prono = new UserPronostic();
+                try {
+                    prono.setMatch(match.clone());
+                }catch(CloneNotSupportedException ex){
+                    //nothing
+                }
+                prono.setUser(currentUser.get());
+                match.setUserPronosticForCurrentUser(prono);
+            }
+        }
+        return matches;
+    }
+
     @RequestMapping(value = "/lastMatches",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,6 +214,26 @@ public class MatchResource {
         List<Match> matches = matchRepository.queryFirst5ByMatchDateBefore(today);
         return matches;
     }
+
+    @RequestMapping(value = "/eighth",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getEighthMatches(){
+        List<Match> matches = matchRepository.queryByMatchTypeOrderByMatchDateAsc(MatchType.HUITIEME);
+        return matches;
+    }
+
+    @RequestMapping(value = "/fourth",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Match> getFourthMatches(){
+        List<Match> matches = matchRepository.queryByMatchTypeOrderByMatchDateAsc(MatchType.QUART);
+        return matches;
+    }
+
+
 
     /**
      * GET  /matches/:id : get the "id" match.

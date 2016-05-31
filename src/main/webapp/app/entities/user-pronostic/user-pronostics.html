@@ -1,13 +1,13 @@
 <div>
-    <h2>Matches</h2>
+    <h2>User Pronostics</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="match.new" >
+                <button class="btn btn-primary" ui-sref="user-pronostic.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span >
-                        Create new Match
+                        Create new User Pronostic
                     </span>
                 </button>
             </div>
@@ -19,54 +19,50 @@
             <thead>
                 <tr>
                     <th><span>ID</span></th>
-                    <th><span>Match Date</span></th>
-                    <th><span>Diffusion</span></th>
-                    <th><span>Match Type</span></th>
                     <th><span>Score Team 1</span></th>
                     <th><span>Score Team 2</span></th>
-                    <th><span translate="pronostiApp.match.team_1">Team 1</span></th>
-                    <th><span translate="pronostiApp.match.team_2">Team 2</span></th>
-                    <th><span>Winner</span></th>
-                    <th><span>Computed?</span></th>
+                    <th><span>Pronostic Date</span></th>
+                    <th><span>User</span></th>
+                    <th><span>Winner Team</span></th>
+                    <th><span>Match</span></th>
+                    <th><span>Points</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="match in vm.matches track by match.id">
-                    <td><a ui-sref="match-detail({id:match.id})">{{match.id}}</a></td>
-                    <td>{{match.matchDate | date:'medium'}}</td>
-                    <td>{{match.diffusion}}</td>
-                    <td translate="{{'pronostiApp.MatchType.' + match.matchType}}">{{match.matchType}}</td>
-                    <td>{{match.scoreTeam1}}</td>
-                    <td>{{match.scoreTeam2}}</td>
+                <tr ng-repeat="userPronostic in vm.userPronostics track by userPronostic.id">
+                    <td><a ui-sref="user-pronostic-detail({id:userPronostic.id})">{{userPronostic.id}}</a></td>
+                    <td>{{userPronostic.scoreTeam1}}</td>
+                    <td>{{userPronostic.scoreTeam2}}</td>
+                    <td>{{userPronostic.pronosticDate | date:'medium'}}</td>
                     <td>
-                        <a ui-sref="team-detail({id:match.team_1.id})">{{match.team_1.name}}</a>
+                        {{userPronostic.user.login}}
                     </td>
                     <td>
-                        <a ui-sref="team-detail({id:match.team_2.id})">{{match.team_2.name}}</a>
+                        <a ui-sref="team-detail({id:userPronostic.winnerTeam.id})">{{userPronostic.winnerTeam.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="team-detail({id:match.winner.id})">{{match.winner.name}}</a>
+                        <a ui-sref="match-detail({id:userPronostic.match.id})">{{userPronostic.match.id}}</a>
                     </td>
                     <td>
-                        {{match.compute}}
+                        {{userPronostic.points}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="match-detail({id:match.id})"
+                                    ui-sref="user-pronostic-detail({id:userPronostic.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="match.edit({id:match.id})"
+                                    ui-sref="user-pronostic.edit({id:userPronostic.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="match.delete({id:match.id})"
+                                    ui-sref="user-pronostic.delete({id:userPronostic.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm"></span>

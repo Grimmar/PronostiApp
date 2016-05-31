@@ -40,6 +40,18 @@
                 <option value="PETITE_FINALE" translate="pronostiApp.MatchType.PETITE_FINALE">PETITE_FINALE</option>
             </select>
         </div>
+        <div class="form-group">
+            <label class="control-label" for="field_scoreTeam1">Score Team 1</label>
+            <input type="number" class="form-control" name="scoreTeam1" id="field_scoreTeam1"
+                    ng-model="vm.match.scoreTeam1"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_scoreTeam2">Score Team 2</label>
+            <input type="number" class="form-control" name="scoreTeam2" id="field_scoreTeam2"
+                    ng-model="vm.match.scoreTeam2"
+                     />
+        </div>
 
         <div class="form-group">
             <label translate="pronostiApp.match.team_1" for="field_team_1">Team 1</label>
@@ -52,6 +64,16 @@
             <select class="form-control" id="field_team_2" name="team_2" ng-model="vm.match.team_2" ng-options="team as team.name for team in vm.teams track by team.id">
                 <option value=""></option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="field_winner">Winner</label>
+            <select class="form-control" id="field_winner" name="winner" ng-model="vm.match.winner" ng-options="team as team.name for team in vm.teams track by team.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_compute">Compute</label>
+            <input type="checkbox" id="field_compute" name="compute" ng-model="vm.match.compute">
         </div>
     </div>
     <div class="modal-footer">

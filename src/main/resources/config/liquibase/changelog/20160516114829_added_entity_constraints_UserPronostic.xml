@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity UserPronostic.
+    -->
+    <changeSet id="20160516114829-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="userPronostic"
+                                 constraintName="fk_userpronostic_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="winner_team_id"
+                                 baseTableName="userPronostic"
+                                 constraintName="fk_userpronostic_winnerteam_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+
+        <addForeignKeyConstraint baseColumnNames="match_id"
+                                 baseTableName="userPronostic"
+                                 constraintName="fk_userpronostic_match_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="match"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="David (generated)" id="1464696123069-1">
+      <addColumn tableName="match">
+         <column name="compute" type="boolean"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1464696123069-2">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1464696123069-3">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="match_date"
+                        tableName="match"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1464696123069-4">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="pronostic_date"
+                        tableName="userpronostic"/>
+   </changeSet>
+</databaseChangeLog>

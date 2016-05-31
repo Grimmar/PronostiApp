@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="David (generated)" id="1463499770924-1">
+      <addColumn tableName="match">
+         <column name="score_team_1" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463499770924-2">
+      <addColumn tableName="match">
+         <column name="score_team_2" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463499770924-3">
+      <addColumn tableName="match">
+         <column name="winner_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463499770924-4">
+      <addForeignKeyConstraint baseColumnNames="winner_id"
+                               baseTableName="match"
+                               constraintName="FK_aoc6xev9rvmcu5k9xqljjvomx"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="team"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463499770924-5">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="created_date"
+                        tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="David (generated)" id="1463499770924-6">
+      <dropDefaultValue columnDataType="timestamp"
+                        columnName="match_date"
+                        tableName="match"/>
+   </changeSet>
+</databaseChangeLog>

@@ -13,7 +13,6 @@ import com.pronostiapp.com.domain.UserScore;
 @SuppressWarnings("unused")
 public interface UserScoreRepository extends JpaRepository<UserScore,Long> {
 
-    //@Query("select userScore from UserScore userScore where userScore.user.login = ?#{principal.username}")
     List<UserScore> queryFirst5ByOrderByScoreDesc();
 
 }

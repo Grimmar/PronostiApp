@@ -15,6 +15,14 @@
         <dd>
             <span translate="{{'pronostiApp.MatchType.' + vm.match.matchType}}">{{vm.match.matchType}}</span>
         </dd>
+        <dt><span>Score Team 1</span></dt>
+        <dd>
+            <span>{{vm.match.scoreTeam1}}</span>
+        </dd>
+        <dt><span>Score Team 2</span></dt>
+        <dd>
+            <span>{{vm.match.scoreTeam2}}</span>
+        </dd>
         <dt><span translate="pronostiApp.match.team_1">Team 1</span></dt>
         <dd>
             <a ui-sref="team-detail({id:vm.match.team_1.id})">{{vm.match.team_1.name}}</a>
@@ -22,6 +30,10 @@
         <dt><span translate="pronostiApp.match.team_2">Team 2</span></dt>
         <dd>
             <a ui-sref="team-detail({id:vm.match.team_2.id})">{{vm.match.team_2.name}}</a>
+        </dd>
+        <dt><span>Winner</span></dt>
+        <dd>
+            <a ui-sref="team-detail({id:vm.match.winner.id})">{{vm.match.winner.name}}</a>
         </dd>
     </dl>
 

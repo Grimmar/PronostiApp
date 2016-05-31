@@ -1,7 +1,7 @@
 /* sprite 24px */
 
-.newflags { display: inline-block;*display:inline; *zoom:1; background: url('/v6/img/flags/newflags.png?2123') no-repeat; width: 24px; height: 14px; background-size: 392px 240px;}
-.newflags-mini { display: inline-block; *display:inline; *zoom:1; background: url('/v6/img/flags/newflags-mini-14.png?270015') no-repeat; width: 14px; height: 8px;  background-size: 224px 135px; vertical-align: middle;position: relative;top: -1px;}
+.newflags { display: inline-block;*display:inline; *zoom:1; background: url(../images/flags.png) no-repeat; width: 24px; height: 14px; background-size: 392px 240px;}
+.newflags-mini { display: inline-block; *display:inline; *zoom:1; background: url(../images/flags-mini.png) no-repeat; width: 14px; height: 8px;  background-size: 224px 135px; vertical-align: middle;position: relative;top: -1px;}
 
 .newflags-mini.AAA { background-position: -1px -0px; }
 .newflags-mini.AFG { background-position: -16px -0px; }

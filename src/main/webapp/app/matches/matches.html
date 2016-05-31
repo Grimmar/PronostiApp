@@ -1,0 +1,18 @@
+<div>
+    <h2>Matches</h2>
+
+    <div class="table-responsive">
+        <div ng-repeat="(date, value) in vm.matches | groupBy:'dayDate'">
+            <h4>{{date}}</h4>
+            <table class="table">
+                <tr ng-repeat="m in value">
+                    <td style="width:20%;"><span>{{m.diffusion}}</span></td>
+                    <td style="width:20%;"><span>{{m.matchType}}</span></td>
+                    <td style="width:10%; text-align:right;"><span>{{m.team_1.name}}</span> <span class="newflags {{m.team_1.code}}"></span></td>
+                    <td style="width:20%; text-align:center;"><span><strong>{{m.hours}}</strong></span></td>
+                    <td style="width:30%; text-align:left;"><span class="newflags {{m.team_2.code}}"></span> <span>{{m.team_2.name}}</span> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

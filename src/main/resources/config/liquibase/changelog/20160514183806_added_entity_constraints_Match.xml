@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="team"/>
 
+        <addForeignKeyConstraint baseColumnNames="winner_id"
+                                 baseTableName="match"
+                                 constraintName="fk_match_winner_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="team"/>
+
     </changeSet>
 </databaseChangeLog>

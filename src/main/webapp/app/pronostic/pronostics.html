@@ -1,0 +1,37 @@
+<div ng-cloak>
+    <h2>Pronostics</h2>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="table-responsive">
+        <div ng-repeat="(date, value) in vm.nextMatches | groupBy:'dayDate'">
+            <h4>{{date}}</h4>
+            <table class="table">
+                <tr ng-repeat="m in value">
+                    <td style="width:10%;"><span><strong>{{m.hours}}</strong></span></td>
+                    <td style="width:10%;"><span>{{m.diffusion}}</span></td>
+                    <td style="width:10%;"><span>{{m.matchType}}</span></td>
+                    <td style="width:20%;"><span>{{m.team_1.name}}</span> <span class="newflags {{m.team_1.code}}"></span></td>
+                    <td style="width:20%;">
+                        <div>
+                            <input type="text" ng-model="m.userPronosticForCurrentUser.scoreTeam1" style="width:25px"> -
+                            <input type="text" ng-model="m.userPronosticForCurrentUser.scoreTeam2" style="width:25px">
+                        </div>
+                        <div ng-show="m.userPronosticForCurrentUser.scoreTeam1 == m.userPronosticForCurrentUser.scoreTeam2
+                        && m.userPronosticForCurrentUser.scoreTeam2 != ''
+                        && m.userPronosticForCurrentUser.scoreTeam1 != ''
+                        && m.userPronosticForCurrentUser.scoreTeam1 != null
+                        && m.userPronosticForCurrentUser.scoreTeam2 != null
+                        && m.match.matchType != 'POULE'">
+                            <input type="radio" ng-model="m.userPronosticForCurrentUser.winnerTeam" ng-value="m.team_1" />
+                            Gagnant
+                            <input type="radio" ng-model="m.userPronosticForCurrentUser.winnerTeam" ng-value="m.team_2" />
+                        </div>
+                    </td>
+                    <td style="width:20%;"><span class="newflags {{m.team_2.code}}"></span> <span>{{m.team_2.name}}</span> </td>
+                    <td style="text-align:right; width:10%;"><button class="btn btn-primary" ng-click="vm.save(m.id)">Pronostic</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

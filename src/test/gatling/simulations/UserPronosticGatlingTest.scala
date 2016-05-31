@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory
 import scala.concurrent.duration._
 
 /**
- * Performance test for the Match entity.
+ * Performance test for the UserPronostic entity.
  */
-class MatchGatlingTest extends Simulation {
+class UserPronosticGatlingTest extends Simulation {
 
     val context: LoggerContext = LoggerFactory.getILoggerFactory.asInstanceOf[LoggerContext]
     // Log all HTTP requests
@@ -37,7 +37,7 @@ class MatchGatlingTest extends Simulation {
         "X-CSRF-TOKEN" -> "${csrf_token}"
     )
 
-    val scn = scenario("Test the Match entity")
+    val scn = scenario("Test the UserPronostic entity")
         .exec(http("First unauthenticated request")
         .get("/api/account")
         .headers(headers_http)
@@ -59,26 +59,26 @@ class MatchGatlingTest extends Simulation {
         .check(headerRegex("Set-Cookie", "CSRF-TOKEN=(.*); [P,p]ath=/").saveAs("csrf_token")))
         .pause(10)
         .repeat(2) {
-            exec(http("Get all matches")
-            .get("/api/matches")
+            exec(http("Get all userPronostics")
+            .get("/api/user-pronostics")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
-            .exec(http("Create new match")
-            .post("/api/matches")
+            .exec(http("Create new userPronostic")
+            .post("/api/user-pronostics")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "matchDate":"2020-01-01T00:00:00.000Z", "diffusion":"SAMPLE_TEXT", "matchType":null, "scoreTeam1":null, "scoreTeam2":null}""")).asJSON
+            .body(StringBody("""{"id":null, "scoreTeam1":null, "scoreTeam2":null, "pronosticDate":"2020-01-01T00:00:00.000Z"}""")).asJSON
             .check(status.is(201))
-            .check(headerRegex("Location", "(.*)").saveAs("new_match_url"))).exitHereIfFailed
+            .check(headerRegex("Location", "(.*)").saveAs("new_userPronostic_url"))).exitHereIfFailed
             .pause(10)
             .repeat(5) {
-                exec(http("Get created match")
-                .get("${new_match_url}")
+                exec(http("Get created userPronostic")
+                .get("${new_userPronostic_url}")
                 .headers(headers_http_authenticated))
                 .pause(10)
             }
-            .exec(http("Delete created match")
-            .delete("${new_match_url}")
+            .exec(http("Delete created userPronostic")
+            .delete("${new_userPronostic_url}")
             .headers(headers_http_authenticated))
             .pause(10)
         }

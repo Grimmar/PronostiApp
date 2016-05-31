@@ -20,6 +20,16 @@
                         <span class="hidden-sm">Home</span>
                     </a>
                 </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="homeMatches" ng-click="vm.collapseNavbar()">
+                        <span class="hidden-sm">Matchs</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active" has-authority="ROLE_USER">
+                    <a ui-sref="pronostic" ng-click="vm.collapseNavbar()">
+                        <span class="hidden-sm">Pronostics</span>
+                    </a>
+                </li>
                 <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
                 <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer" has-authority="ROLE_ADMIN">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
@@ -48,6 +58,12 @@
                             <a ui-sref="user-score" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span >User Score</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active" >
+                            <a ui-sref="user-pronostic" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <span >User Pronostic</span>
                             </a>
                         </li>
                         <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

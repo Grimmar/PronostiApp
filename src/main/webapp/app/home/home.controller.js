@@ -15,6 +15,7 @@
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
+        vm.showTree = false;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -23,9 +24,8 @@
         getAllTeam();
         getNextMatches();
         getLastMatches();
-        getAllUserScores();
         getTopUserScores();
-        //getMax8Score();
+        initiateTree();
 
         function getAccount() {
             Principal.identity().then(function(account) {
@@ -33,7 +33,8 @@
                 vm.isAuthenticated = Principal.isAuthenticated;
             });
         }
-        function register () {
+
+        function register() {
             $state.go('register');
         }
 
@@ -78,8 +79,7 @@
                                     data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
                                     return data;
                                 }
-                            },
-                            'update': { method:'PUT' }
+                            }
                         });
                     match.query(function(result) {
                         vm.nextMatches = result;
@@ -103,8 +103,7 @@
                                 data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
                                     return data;
                                 }
-                            },
-                        'update': { method:'PUT' }
+                            }
                     });
                     match.query(function(result) {
                         vm.lastMatches = result;
@@ -113,30 +112,6 @@
             vm.loadAll();
         }
 
-        
-        function getAllUserScores($scope, $state){
-            vm.allUserScores = [];
-            vm.loadAll = function() {
-                var resourceUrl = 'api/user-scores';
-
-                var score = $resource(resourceUrl, {}, {
-                                        'query': { method: 'GET', isArray: true},
-                                        'get': {
-                                            method: 'GET',
-                                            transformResponse: function (data) {
-                                                data = angular.fromJson(data);
-                                                return data;
-                                            }
-                                        },
-                                        'update': { method:'PUT' }
-                                    });
-                score.query(function(result) {
-                    vm.allUserScores = result;
-                });
-            };
-            vm.loadAll();
-        }
-        
         function getTopUserScores($scope, $state){
             vm.topUserScores = [];
             vm.loadAll = function() {
@@ -150,8 +125,7 @@
                                                 data = angular.fromJson(data);
                                                 return data;
                                             }
-                                        },
-                                        'update': { method:'PUT' }
+                                        }
                                     });
                 score.query(function(result) {
                     vm.topUserScores = result;
@@ -159,27 +133,49 @@
             };
             vm.loadAll();
         }
-        
-        function getMax8Score($scope, $state){
-            vm.max8Score = [];
-            vm.loadAll = function() {
-                var resourceUrl = 'api/topUserScores';
 
-                var score = $resource(resourceUrl, {}, {
-                                        'query': { method: 'GET', isArray: true},
-                                        'get': {
-                                            method: 'GET',
-                                            transformResponse: function (data) {
-                                                data = angular.fromJson(data);
-                                                return data;
-                                            }
-                                        },
-                                        'update': { method:'PUT' }
-                                    });
-                score.query(function(result) {
-                    vm.max8Score = result;
-                });
+        function initiateTree($scope, $state){
+            vm.eighth = [];
+            vm.loadAll = function() {
+
+                var resourceUrl =  'api/eighth';
+                var match = $resource(resourceUrl, {}, {
+                    'query': { method: 'GET', isArray: true},
+                    'get': {
+                        method: 'GET',
+                        transformResponse: function (data) {
+                            data = angular.fromJson(data);
+                            data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
+                            return data;
+                        }
+                                        }
+                    });
+                    match.query(function(result) {
+                        vm.eighth = result;
+                    });
             };
+
+            vm.loadAll();
+            if(vm.eighth.count =! 0){
+                vm.showTree = true;
+                vm.loadAll = function() {
+                    var resourceUrl =  'api/fourth';
+                    var match = $resource(resourceUrl, {}, {
+                                    'query': { method: 'GET', isArray: true},
+                                    'get': {
+                                        method: 'GET',
+                                        transformResponse: function (data) {
+                                            data = angular.fromJson(data);
+                                            data.matchDate = DateUtils.convertDateTimeFromServer(data.matchDate);
+                                            return data;
+                                        }
+                                                        }
+                                    });
+                    match.query(function(result) {
+                        vm.fourth = result;
+                    });
+                };
+            }
             vm.loadAll();
         }
     }
